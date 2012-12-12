@@ -28,8 +28,14 @@ end
 
 proposals.sort.each do |proposal|
   print Color.red, "(#{proposal.votes}) "
-  print Color.yellow, proposal.title, "\n"
-  print Color.clear, proposal.abstract, "\n"
+
+  if proposal.title =~ /Impressive Ruby Productivity with Vim and Tmux/
+    print Color.yellow, Color.bold
+  else
+    print Color.blue
+  end
+
+  print proposal.title, Color.clear, "\n", proposal.abstract, "\n"
 end
 
 print Color.green, "#{proposals.size} proposals, #{total_votes} votes."
