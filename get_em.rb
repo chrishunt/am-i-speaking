@@ -26,17 +26,21 @@ proposals = doc.css('.proposal').map do |proposal|
   Proposal.new(title, abstract, votes)
 end
 
-proposals.sort.each do |proposal|
-  print Color.red, "(#{proposal.votes}) "
+proposals.sort.each_with_index do |proposal, index|
+  print Color.blue
+  print "%02d" % (proposals.size - index)
+  print " "
+
+  print Color.red, "("
+  print "%02d" % proposal.votes
+  print ") ", Color.clear
 
   if proposal.title =~ /Impressive Ruby Productivity with Vim and Tmux/
     print Color.yellow, Color.bold
-  else
-    print Color.blue
   end
 
-  print proposal.title, Color.clear, "\n", proposal.abstract, "\n"
+  print proposal.title, Color.clear, "\n"
 end
 
-print Color.green, "#{proposals.size} proposals, #{total_votes} votes."
-print Color.clear, "\n"
+print Color.green, "#{proposals.size} proposals, #{total_votes} votes.\n"
+print Color.clear
