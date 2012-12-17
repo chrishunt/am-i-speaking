@@ -1,7 +1,7 @@
 require 'nokogiri'
 require 'open-uri'
 
-class LARubyProposals
+class AmISpeaking
   attr_reader :my_talk
 
   class Color
@@ -75,4 +75,4 @@ class LARubyProposals
 end
 
 my_talk = ARGV.join(' ')
-LARubyProposals.new(my_talk).run
+AmISpeaking.new(my_talk).run

@@ -1,5 +1,5 @@
 # Am I Speaking?
 
 ```ruby
-ruby get_em.rb "My Talk Title"
+ruby am_i_speaking.rb "My Talk Title"
 ```
