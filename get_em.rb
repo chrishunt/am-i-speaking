@@ -2,6 +2,8 @@ require 'nokogiri'
 require 'open-uri'
 
 class LARubyProposals
+  attr_reader :my_talk
+
   class Color
     require 'term/ansicolor'
     extend Term::ANSIColor
@@ -11,6 +13,10 @@ class LARubyProposals
     def <=>(other)
       votes <=> other.votes
     end
+  end
+
+  def initialize(my_talk)
+    @my_talk = (my_talk.empty? ? default_talk : my_talk).downcase
   end
 
   def run
@@ -40,8 +46,8 @@ class LARubyProposals
     end
   end
 
-  def my_talk_title
-    /Impressive Ruby Productivity with Vim and Tmux/
+  def default_talk
+    "Impressive Ruby Productivity with Vim and Tmux"
   end
 
   def print_summary
@@ -59,7 +65,7 @@ class LARubyProposals
       print "%02d" % proposal.votes
       print ") ", Color.clear
 
-      if proposal.title =~ my_talk_title
+      if proposal.title.downcase == my_talk
         print Color.yellow, Color.bold
       end
 
@@ -68,4 +74,5 @@ class LARubyProposals
   end
 end
 
-LARubyProposals.new.run
+my_talk = ARGV.join(' ')
+LARubyProposals.new(my_talk).run
